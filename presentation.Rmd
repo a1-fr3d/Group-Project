@@ -1,7 +1,7 @@
 ---
-title: "Presentation title"
-subtitle: "Presentation subtitle (if any)"
-author: "Team name <br> Names of team members"
+title: "Student Spending"
+subtitle: 
+author: " Brainless Data Group <br> Alfred, Leo, "
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
 output:
@@ -30,23 +30,25 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 
 ```{r load-data, include=FALSE}
 # Load your data here
+monthly_expense <- read.csv("monthly_expense.csv")
 ```
 
 ```{r include=FALSE}
 style_xaringan(
-  title_slide_background_image = "img/confetti.jpg"
+  title_slide_background_image = "wallpaper.jpg",
+  title_slide_text_color = "black"
 )
 ```
 
 class: center, middle
 
-## A statement of the overall goal / research question
+## Who Will Likely To Spend More?
 
 ---
 
 class: inverse, center, middle
 
-# Section title
+# Kaggle
 
 ---
 
