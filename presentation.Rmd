@@ -52,12 +52,21 @@ class: inverse, center, middle
 
 ---
 
-# Hello World
+# Variables - 13
 
-- Click the `Knit` button to compile your presentation
+- Gender
 
-- Make sure to commit and push all resulting files to your GitHub repo
+- Year of Study
 
+- Living
+
+- Scholarship
+
+- Part-time
+
+- Transport
+
+- Etc
 ---
 
 class: inverse, middle, center
