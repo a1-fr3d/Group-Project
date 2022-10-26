@@ -1,7 +1,7 @@
 ---
 title: "Student Spending"
 subtitle: 
-author: " Brainless Data Group <br> Alfred, Leo, "
+author: " Brainless Data Group <br> Alfred, Leo, Rolan"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
 output:
