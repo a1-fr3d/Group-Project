@@ -114,7 +114,14 @@ ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Gender, color = Gender
 ```
 
 ---
-
+```{r graph, echo=FALSE}
+me <- monthly_expense %>%
+  filter(Monthly_expenses < 600) %>%
+  mutate(Age = as.character(Age))
+ggplot(data = me, mapping = aes(x = Monthly_expenses, fill = Age)) + 
+  geom_bar() +
+  facet_wrap(~Age)
+```
 
 ---
 class: center, middle
