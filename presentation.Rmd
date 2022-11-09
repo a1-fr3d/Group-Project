@@ -104,19 +104,17 @@ class: center, middle
 
 ```{r plot-expense, echo = FALSE}
 me <- monthly_expense %>%
-filter(!is.na(Study_year), !is.na(Monthly_expenses))
+  filter(!is.na(Monthly_expenses))
 
-ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Age, color = Study_year)) +
-  geom_point(position = "jitter") 
+ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Gender, color = Gender)) +
+  geom_boxplot() +
+  labs(x = "Mothly Expense",
+       y = "Gender", 
+       title = "The Relationship Between Gender and Monthly Expense")
 ```
+
 ---
-# Plan
-- Clean the data
-- Create different types of plots to support our hypothesis
-- Find the mean of monthly expense for comparison
-- ...
+
 
 ---
 class: center, middle
-# Question?
-(Please say NO!!!)
