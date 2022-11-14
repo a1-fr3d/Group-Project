@@ -100,28 +100,48 @@ class: center, middle
 
 ---
 
-# Plots
+# Gender
 
-```{r plot-expense, echo = FALSE}
+```{r, Gender, echo = FALSE}
 me <- monthly_expense %>%
   filter(!is.na(Monthly_expenses))
 
 ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Gender, color = Gender)) +
   geom_boxplot() +
-  labs(x = "Mothly Expense",
+  labs(x = "Mothly Expenses",
        y = "Gender", 
        title = "The Relationship Between Gender and Monthly Expense")
 ```
 
 ---
-```{r graph, echo=FALSE}
+
+# Age
+
+```{r, Age, echo=FALSE}
 me <- monthly_expense %>%
   filter(Monthly_expenses < 600) %>%
   mutate(Age = as.character(Age))
-ggplot(data = me, mapping = aes(x = Monthly_expenses, fill = Age)) + 
-  geom_bar() +
-  facet_wrap(~Age)
+ggplot(data = me, mapping = aes(y = Monthly_expenses, 
+                                x = Age,
+                                color = Age)) + 
+  geom_boxplot() +
+  labs(title = "The Effect of Age on Monthly Expenses",
+       y = "Monthly Expeneses")
 ```
 
 ---
-class: center, middle
+
+# Year of Study
+
+``` {r, Study Year, echo = FALSE}
+me <- monthly_expense %>%
+  filter(Monthly_expenses < 600,
+         Study_year <= 4) %>%
+  mutate(Study_year = as.character(Study_year))
+ggplot(data = me, mapping = aes(y = Monthly_expenses,
+                                x = Study_year,
+                                fill = Study_year)) +
+  geom_violin()
+```
+
+---
