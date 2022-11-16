@@ -145,3 +145,29 @@ ggplot(data = me, mapping = aes(y = Monthly_expenses,
 ```
 
 ---
+
+#Living
+```{r, Living, echo = FALSE}
+me1 <- read.csv("monthly_expense.csv", na="") %>%
+  mutate(Living = as.factor(Living))
+
+me2 <- filter(me1, !is.na(Living) & !is.na(Monthly_expenses)) 
+  ggplot(data = me2, mapping = aes(x = Monthly_expenses, fill = Living)) +
+          geom_histogram(binwidth = 10) +
+          facet_wrap(~Living)
+  ggplot(data = me2, mapping = aes(x = Living,y = Monthly_expenses, fill = Living)) +
+geom_violin()
+
+
+
+```
+
+---
+
+#Scholarship
+
+```{r, Scholarship, echo = FALSE}
+filter(me2, !is.na(Scholarship)) %>%
+  ggplot(mapping = aes(x = Scholarship, y = Monthly_expenses), fill = Scholarship) +
+  geom_violin()
+```
