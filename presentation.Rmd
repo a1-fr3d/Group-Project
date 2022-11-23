@@ -21,6 +21,7 @@ library(tidyverse)
 library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
+library(tidymodels)
 ```
 
 ```{r setup, include=FALSE}
@@ -170,4 +171,44 @@ geom_violin()
 filter(me2, !is.na(Scholarship)) %>%
   ggplot(mapping = aes(x = Scholarship, y = Monthly_expenses), fill = Scholarship) +
   geom_violin()
+```
+---
+```{r, summarise, echo = FALSE}
+# Replace all "" in the survey responds with NA
+me <- read.csv("monthly_expense.csv", na = "") 
+
+# Create function that will plot counts against different responds on one variable
+x <- function(i){
+ggplot(data = me[i], aes(x = names(me[i]))) +
+  geom_bar() +
+  facet_wrap(names(me[i]))
+  
+}
+x(1)
+x(2)
+x(3)
+x(4)
+x(5)
+x(6)
+x(7)
+x(8)
+x(9)
+x(10)
+x(11)
+x(12)
+```
+
+```{r regression, echo = FALSE}
+# Impact of variables on monthly expense at a first glance. This regression model does not consider the relation between predictors.
+reg <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Monthly_expenses ~ ., data = me) %>%
+  tidy()
+```
+```{r reg_example, echo = FALSE}
+reg1 <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Monthly_expenses ~ Study_year*Living, data = me) %>%
+  tidy()
+
 ```
