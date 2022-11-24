@@ -30,8 +30,8 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-# Load your data here
-monthly_expense <- read.csv("monthly_expense.csv")
+# Replace all empty space in the survey responds with NA
+monthly_expense <- read.csv("monthly_expense.csv", na = "")
 ```
 
 ```{r include=FALSE}
@@ -107,7 +107,7 @@ class: center, middle
 me <- monthly_expense %>%
   filter(!is.na(Monthly_expenses))
 
-ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Gender, color = Gender)) +
+ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Gender, fill = Gender)) +
   geom_boxplot() +
   labs(x = "Mothly Expenses",
        y = "Gender", 
@@ -124,7 +124,7 @@ me <- monthly_expense %>%
   mutate(Age = as.character(Age))
 ggplot(data = me, mapping = aes(y = Monthly_expenses, 
                                 x = Age,
-                                color = Age)) + 
+                                fill = Age)) + 
   geom_boxplot() +
   labs(title = "The Effect of Age on Monthly Expenses",
        y = "Monthly Expeneses")
@@ -148,18 +148,13 @@ ggplot(data = me, mapping = aes(y = Monthly_expenses,
 ---
 
 #Living
+
 ```{r, Living, echo = FALSE}
-me1 <- read.csv("monthly_expense.csv", na="") %>%
-  mutate(Living = as.factor(Living))
-
-me2 <- filter(me1, !is.na(Living) & !is.na(Monthly_expenses)) 
-  ggplot(data = me2, mapping = aes(x = Monthly_expenses, fill = Living)) +
-          geom_histogram(binwidth = 10) +
-          facet_wrap(~Living)
-  ggplot(data = me2, mapping = aes(x = Living,y = Monthly_expenses, fill = Living)) +
-geom_violin()
-
-
+me <- monthly_expense %>%
+  mutate(Living = as.factor(Living)) %>%
+  filter(!is.na(Living) & !is.na(Monthly_expenses))
+  ggplot(data = me, mapping = aes(x = Living,y = Monthly_expenses, fill = Living)) +
+geom_boxplot()
 
 ```
 
@@ -168,15 +163,18 @@ geom_violin()
 #Scholarship
 
 ```{r, Scholarship, echo = FALSE}
-filter(me2, !is.na(Scholarship)) %>%
-  ggplot(mapping = aes(x = Scholarship, y = Monthly_expenses), fill = Scholarship) +
-  geom_violin()
-```
----
-```{r, summarise, echo = FALSE}
-# Replace all "" in the survey responds with NA
-me <- read.csv("monthly_expense.csv", na = "") 
+me <- monthly_expense %>%
+  filter(!is.na(Scholarship) & !is.na(Monthly_expenses))
 
+ggplot(data = me, mapping = aes(x = Scholarship, 
+                     y = Monthly_expenses, 
+                     fill = Scholarship)) +
+  geom_boxplot()
+```
+
+---
+
+```{r, summarise, echo = FALSE}
 # Create function that will plot counts against different responds on one variable
 x <- function(i){
 ggplot(data = me[i], aes(x = names(me[i]))) +
@@ -198,6 +196,8 @@ x(11)
 x(12)
 ```
 
+---
+
 ```{r regression, echo = FALSE}
 # Impact of variables on monthly expense at a first glance. This regression model does not consider the relation between predictors.
 reg <- linear_reg() %>%
@@ -205,6 +205,9 @@ reg <- linear_reg() %>%
   fit(Monthly_expenses ~ ., data = me) %>%
   tidy()
 ```
+
+---
+
 ```{r reg_example, echo = FALSE}
 reg1 <- linear_reg() %>%
   set_engine("lm") %>%
