@@ -30,15 +30,16 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-# Replace all empty space in the survey responds with NA
+# Read data and replace all empty space in the survey responds with NA
 monthly_expense <- read.csv("monthly_expense.csv", na = "")
+
 ```
 
 ```{r include=FALSE}
 style_xaringan(
   title_slide_background_image = "wallpaper.jpg",
-  title_slide_text_color = "black"
-)
+  title_slide_text_color = "black")
+
 ```
 
 class: center, middle
@@ -46,25 +47,21 @@ class: center, middle
 ## What Affects Student Spending?
 
 ---
-
 class: inverse, center, middle
 
 # Kaggle
 
 ---
-
 class: inverse, center, middle
 
 # Variables - 13
 
 ---
-
 class: inverse, center, middle
 
 ## Observations - 105
 
 ---
-
 # Variables that we will use...
 
 .pull-left[
@@ -85,7 +82,6 @@ class: inverse, center, middle
 ]
 
 ---
-
 # Table
 
 ```{r table, echo = FALSE}
@@ -97,10 +93,9 @@ glimpse(monthly_expense)
 class: center, middle
 # Hypothesis
 
- As year of study increases, spending also increases.
+ Entertainment has the most effect on students' monthly expense.
 
 ---
-
 # Gender
 
 ```{r, Gender, echo = FALSE}
@@ -108,14 +103,13 @@ me <- monthly_expense %>%
   filter(!is.na(Monthly_expenses))
 
 ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Gender, fill = Gender)) +
-  geom_boxplot() +
+  geom_boxplot(show.legend = FALSE) +
   labs(x = "Mothly Expenses",
        y = "Gender", 
-       title = "The Relationship Between Gender and Monthly Expense")
+       title = "Gender vs Monthly Expense")
 ```
 
 ---
-
 # Age
 
 ```{r, Age, echo=FALSE}
@@ -126,12 +120,11 @@ ggplot(data = me, mapping = aes(y = Monthly_expenses,
                                 x = Age,
                                 fill = Age)) + 
   geom_boxplot() +
-  labs(title = "The Effect of Age on Monthly Expenses",
-       y = "Monthly Expeneses")
+  labs(title = "Age vs Monthly Expenses",
+       y = "Monthly Expenses")
 ```
 
 ---
-
 # Year of Study
 
 ``` {r, Study Year, echo = FALSE}
@@ -142,11 +135,13 @@ me <- monthly_expense %>%
 ggplot(data = me, mapping = aes(y = Monthly_expenses,
                                 x = Study_year,
                                 fill = Study_year)) +
-  geom_violin()
+  geom_violin(show.legend = FALSE)  +
+  labs(title = "Study year vs Monthly Expenses",
+       x = "Study Year",
+       y = "Monthly Expenses")
 ```
 
 ---
-
 #Living
 
 ```{r, Living, echo = FALSE}
@@ -154,12 +149,14 @@ me <- monthly_expense %>%
   mutate(Living = as.factor(Living)) %>%
   filter(!is.na(Living) & !is.na(Monthly_expenses))
   ggplot(data = me, mapping = aes(x = Living,y = Monthly_expenses, fill = Living)) +
-geom_boxplot()
+geom_boxplot(show.legend = FALSE) +
+    labs(title = "Types of Living vs Monthly Expenses",
+         x = "Living",
+         y = "Monthly Expenses")
 
 ```
 
 ---
-
 #Scholarship
 
 ```{r, Scholarship, echo = FALSE}
@@ -169,7 +166,42 @@ me <- monthly_expense %>%
 ggplot(data = me, mapping = aes(x = Scholarship, 
                      y = Monthly_expenses, 
                      fill = Scholarship)) +
-  geom_boxplot()
+  geom_boxplot(show.legend = FALSE) +
+  labs(title = "Scholarship vs Monthly Expenses",
+       x = "Scholarship",
+       y = "Monthly Expenses")
+```
+
+---
+# Part time job
+
+``` {r, Part time job, echo = FALSE}
+me <- monthly_expense %>%
+  filter(!is.na(Part_time_job) & !is.na(Monthly_expenses))
+ggplot(data = me, mapping = aes(x = Part_time_job,
+                                y = Monthly_expenses,
+                                fill = Part_time_job)) +
+  geom_boxplot(show.legend = FALSE) +
+  labs(title = "Part-time Job vs Monthly Expenses",
+       x = "Part-Time Job",
+       y = "Monthly Expenses")
+
+```
+
+---
+# Transportation 
+
+``` {r, Transportation, echo = FALSE}
+me <- monthly_expense %>%
+  filter(!is.na(Transporting) & !is.na(Monthly_expenses))
+ggplot(data = me, mapping = aes(x = Transporting,
+                                y = Monthly_expenses,
+                                fill = Transporting)) +
+  geom_boxplot(show.legend = FALSE) +
+  labs(title = "Transportation vs Monthly Expenses",
+       x = "Transportation",
+       y = "Monthly Expenses")
+
 ```
 
 ---
