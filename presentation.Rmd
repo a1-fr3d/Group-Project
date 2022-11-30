@@ -1,7 +1,7 @@
 ---
 title: "Student Spending"
 subtitle: 
-author: " Brainless Data Group <br> Alfred, Leo, Rolan"
+author: " Brainless Data Group <br> Alfred, Leo, Rolan, Yuki, Ariana"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
 output:
@@ -205,45 +205,15 @@ ggplot(data = me, mapping = aes(x = Transporting,
 ```
 
 ---
+# Game and Hobbies
 
-```{r, summarise, echo = FALSE}
-# Create function that will plot counts against different responds on one variable
-x <- function(i){
-ggplot(data = me[i], aes(x = names(me[i]))) +
-  geom_bar() +
-  facet_wrap(names(me[i]))
-  
-}
-x(1)
-x(2)
-x(3)
-x(4)
-x(5)
-x(6)
-x(7)
-x(8)
-x(9)
-x(10)
-x(11)
-x(12)
-```
+```{r, Game and Hobbies, echo = FALSE}
+me <- monthly_expense %>%
+  filter(!is.na(Games_._Hobbies) & !is.na(Monthly_expenses))
 
----
-
-```{r regression, echo = FALSE}
-# Impact of variables on monthly expense at a first glance. This regression model does not consider the relation between predictors.
-reg <- linear_reg() %>%
-  set_engine("lm") %>%
-  fit(Monthly_expenses ~ ., data = me) %>%
-  tidy()
-```
-
----
-
-```{r reg_example, echo = FALSE}
-reg1 <- linear_reg() %>%
-  set_engine("lm") %>%
-  fit(Monthly_expenses ~ Study_year*Living, data = me) %>%
-  tidy()
-
+ggplot(data = me, mapping = aes(x = Games_._Hobbies, y = Monthly_expenses, fill = Games_._Hobbies))+
+    geom_boxplot()+
+    labs(x = "Games & Hobbies" ,
+         y = "Monthly expenses", 
+         title = "The Relationship Between Games & Hobbies and Monthly Expense")
 ```
