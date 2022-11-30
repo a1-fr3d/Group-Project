@@ -207,6 +207,7 @@ ggplot(data = me, mapping = aes(x = Transporting,
 ---
 # Game and Hobbies
 
+<<<<<<< HEAD
 ```{r, Game and Hobbies, echo = FALSE}
 me <- monthly_expense %>%
   filter(!is.na(Games_._Hobbies) & !is.na(Monthly_expenses))
@@ -217,3 +218,112 @@ ggplot(data = me, mapping = aes(x = Games_._Hobbies, y = Monthly_expenses, fill 
          y = "Monthly expenses", 
          title = "The Relationship Between Games & Hobbies and Monthly Expense")
 ```
+=======
+```{r, summarise, echo = FALSE}
+# Create function that will plot counts against different responds on one variable
+
+#################### 
+me <- read.csv("monthly_expense.csv", na = "")%>% filter(!is.na(Monthly_expenses))
+####################
+
+x <- function(i){
+ggplot(data = me[i], aes(x = names(me[i]))) +
+  geom_bar() +
+  facet_wrap(names(me[i]))
+  
+}
+x(1)
+x(2)
+x(3)
+x(4)
+x(5)
+x(6)
+x(7)
+x(8)
+x(9)
+x(10)
+x(11)
+x(12)
+```
+
+---
+```{r reg 1-st_try, echo = FALSE}
+#
+reg_try <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Monthly_expenses ~., data = me) %>%
+  tidy()
+
+```
+```{r bad_variables, echo = FALSE}
+# First of all consider counts:counts for drinking and smoking have mostly negative responds, so we neglect those variables
+
+#According to reg_try Cosmetics_._Self.care  has weak correlation to the monthly expenses, so we check its graph against monthly expenses. If we also consider gender for this graph, we get that most of females do use cosmetics and most of males do not. So Cosmetics_._Self.care is highly dependent on Gender and we can neglect this variable as well. 
+
+#######################################################
+
+ggplot(data = me, aes(x = Cosmetics_._Self.care)) +
+    geom_bar() + facet_wrap(~Gender) +
+  labs(title = "Cosmetics_._Self.care and Gender")
+######################################################
+
+
+
+
+######################################################
+#In second linear regression attempt variables: Drinks, Smoking, Cosmetics_._Self.care were deleted (adj.r.squared ~ 0.40). According to this attempt Games_._Hobbies, Scholarship are negligible, so we plot their graphs against monthly expenses. Yet, looking at the graphs we can see some dependence.
+ggplot(data = me, aes(x = Monthly_expenses)) +
+  geom_bar() +
+  facet_wrap(~ Games_._Hobbies) +
+  labs(title = "Games_._Hobbies")
+
+ggplot(data = me, aes(x = Monthly_expenses)) +
+  geom_bar() +
+  facet_wrap(~ Scholarship) +
+  labs(title = "Scholarship")
+#######################################################
+
+
+######################################################
+#We can observe some similar patterns for the graphs of Monthly_Subscription(Yes) and Games_._Hobbies(Yes). Therefore, for the third linear regression we will exclude one of those: Monthly_Subscriptions.
+ggplot(data = filter(me, !is.na(Monthly_Subscription)), aes(x = Monthly_expenses)) +
+  geom_bar() +
+  facet_wrap(~ Monthly_Subscription) +
+  labs(title = "Monthly_Subscription")
+
+ggplot(data = me, aes(x = Monthly_expenses)) +
+  geom_bar() +
+  facet_wrap(~ Games_._Hobbies) +
+  labs(title = "Games_._Hobbies")
+######################################################
+```
+```{r reg} 
+set.seed(1000)
+me_split <- initial_split(me, prop = 0.8)
+
+train_data <- training(me_split)
+testing_data <- testing(me_split)
+
+
+# Second linear regression
+reg <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Monthly_expenses ~ .  - Drinks - Smoking - Cosmetics_._Self.care,data = train_data) 
+reg_predict <- predict(reg, testing_data) %>%
+  bind_cols(testing_data) %>% transmute(resid = .pred - Monthly_expenses, Monthly_expenses = Monthly_expenses, .pred = .pred)
+REG <- reg%>%tidy()
+
+
+#Third linear regression. This one has high accuracy. But I'm not sure if it is good. From the high accuracy it might follow that there is some relation between Age, Study Year, Transporting and Living. May be we can plot some of those variables against each other. Apart from those variables I guess we can briefly say something about part time job gender and scholarship (in third linear regression they are also significant). 
+reg1 <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Monthly_expenses ~ . +Age*Study_year*Transporting*Living - Drinks - Smoking - Cosmetics_._Self.care - Monthly_Subscription,data = train_data) 
+reg_predict1 <- predict(reg1, testing_data) %>%
+  bind_cols(testing_data) %>% transmute(resid = .pred - Monthly_expenses, Monthly_expenses = Monthly_expenses, .pred = .pred)
+REG1 <- reg1%>%tidy()
+
+#####So let's focus on: AGE, STUDY YEAR, LIVING, TRANSPORTING, GENDER, PART TIME JOB, SCHOLARSHIP.
+```
+
+---
+>>>>>>> 9cd3386d52d0dbade366a93a63397314a8c7ce75

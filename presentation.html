@@ -3,8 +3,13 @@
   <head>
     <title>Student Spending</title>
     <meta charset="utf-8" />
+<<<<<<< HEAD
     <meta name="author" content="Brainless Data Group   Alfred, Leo, Rolan, Yuki, Ariana" />
     <meta name="date" content="2022-11-30" />
+=======
+    <meta name="author" content="Brainless Data Group   Alfred, Leo, Rolan" />
+    <meta name="date" content="2022-11-29" />
+>>>>>>> 9cd3386d52d0dbade366a93a63397314a8c7ce75
     <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -22,7 +27,11 @@ class: center, middle, inverse, title-slide
 ### University of Edinburgh
 ]
 .date[
+<<<<<<< HEAD
 ### 2022-11-30
+=======
+### 2022-11-29
+>>>>>>> 9cd3386d52d0dbade366a93a63397314a8c7ce75
 ]
 
 ---
@@ -141,7 +150,53 @@ class: center, middle
 ---
 # Game and Hobbies
 
+<<<<<<< HEAD
 &lt;img src="presentation_files/figure-html/Game and Hobbies-1.png" width="80%" /&gt;
+=======
+&lt;img src="presentation_files/figure-html/summarise-1.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-2.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-3.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-4.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-5.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-6.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-7.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-8.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-9.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-10.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-11.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-12.png" width="80%" /&gt;
+
+---
+
+&lt;img src="presentation_files/figure-html/bad_variables-1.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/bad_variables-2.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/bad_variables-3.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/bad_variables-4.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/bad_variables-5.png" width="80%" /&gt;
+
+```r
+set.seed(1000)
+me_split &lt;- initial_split(me, prop = 0.8)
+
+train_data &lt;- training(me_split)
+testing_data &lt;- testing(me_split)
+
+
+# Second linear regression
+reg &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(Monthly_expenses ~ .  - Drinks - Smoking - Cosmetics_._Self.care,data = train_data) 
+reg_predict &lt;- predict(reg, testing_data) %&gt;%
+  bind_cols(testing_data) %&gt;% transmute(resid = .pred - Monthly_expenses, Monthly_expenses = Monthly_expenses, .pred = .pred)
+REG &lt;- reg%&gt;%tidy()
+
+
+#Third linear regression. This one has high accuracy. But I'm not sure if it is good. From the high accuracy it might follow that there is some relation between Age, Study Year, Transporting and Living. May be we can plot some of those variables against each other. Apart from those variables I guess we can briefly say something about part time job gender and scholarship (in third linear regression they are also significant). 
+reg1 &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(Monthly_expenses ~ . +Age*Study_year*Transporting*Living - Drinks - Smoking - Cosmetics_._Self.care - Monthly_Subscription,data = train_data) 
+reg_predict1 &lt;- predict(reg1, testing_data) %&gt;%
+  bind_cols(testing_data) %&gt;% transmute(resid = .pred - Monthly_expenses, Monthly_expenses = Monthly_expenses, .pred = .pred)
+```
+
+```
+## Warning in predict.lm(object = object$fit, newdata = new_data, type =
+## "response"): prediction from a rank-deficient fit may be misleading
+```
+
+```r
+REG1 &lt;- reg1%&gt;%tidy()
+
+#####So let's focus on: AGE, STUDY YEAR, LIVING, TRANSPORTING, GENDER, PART TIME JOB, SCHOLARSHIP.
+```
+
+---
+>>>>>>> 9cd3386d52d0dbade366a93a63397314a8c7ce75
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
