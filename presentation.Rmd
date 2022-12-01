@@ -208,7 +208,7 @@ ggplot(data = me, aes(x = Monthly_expenses)) +
 ```
 ]
 
----
+
 ```{r reg, echo= FALSE} 
 set.seed(1000)
 me_split <- initial_split(me, prop = 0.8)
@@ -227,6 +227,7 @@ REG <- reg%>%tidy()
 ```
 
 ---
+
 # Gender
 
 ```{r, Gender, echo = FALSE}
@@ -364,5 +365,6 @@ ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Games_._Hobbies, fill 
 ```
 
 ---
+class: inverse, center, middle
 
-
+# Thank You for Wasting Your Time!!!
