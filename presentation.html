@@ -102,6 +102,77 @@ class: center, middle
 # Hypothesis
 
  Entertainment has the most effect on students' monthly expense.
+---
+
+
+## Counts for variables
+.pull-left[
+&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/unnamed-chunk-2-2.png" width="80%" /&gt;
+]
+
+.pull-right[
+&lt;img src="presentation_files/figure-html/unnamed-chunk-3-1.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/unnamed-chunk-3-2.png" width="80%" /&gt;
+]
+---
+
+## Counts for variables
+.pull-left[
+&lt;img src="presentation_files/figure-html/unnamed-chunk-4-1.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/unnamed-chunk-4-2.png" width="80%" /&gt;
+]
+
+.pull-right[
+&lt;img src="presentation_files/figure-html/unnamed-chunk-5-1.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/unnamed-chunk-5-2.png" width="80%" /&gt;
+]
+---
+## Counts for variables
+.pull-left[
+&lt;img src="presentation_files/figure-html/unnamed-chunk-6-1.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/unnamed-chunk-6-2.png" width="80%" /&gt;
+]
+
+.pull-right[
+&lt;img src="presentation_files/figure-html/unnamed-chunk-7-1.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/unnamed-chunk-7-2.png" width="80%" /&gt;
+]
+---
+# Linear regression 
+
+```
+## # A tibble: 14 × 5
+##    term                       estimate std.error statistic  p.value
+##    &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 "(Intercept)"                -75.4     105.      -0.719 0.476   
+##  2 "GenderMale "                -38.5      19.6     -1.96  0.0556  
+##  3 "Age"                         20.3       6.45     3.15  0.00274 
+##  4 "Study_year"                 -17.1      11.0     -1.55  0.128   
+##  5 "LivingHostel"                26.6      20.4      1.30  0.198   
+##  6 "ScholarshipYes"             -24.1      17.7     -1.36  0.181   
+##  7 "Part_time_jobYes"           -40.5      28.1     -1.44  0.157   
+##  8 "TransportingMotorcycle"     -54.2      16.2     -3.35  0.00153 
+##  9 "TransportingNo"             -91.3      21.6     -4.23  0.000101
+## 10 "SmokingYes"                 -13.2      23.9     -0.553 0.583   
+## 11 "DrinksYes"                   90.5      30.8      2.94  0.00492 
+## 12 "Games_._HobbiesYes"         -24.1      13.6     -1.78  0.0817  
+## 13 "Cosmetics_._Self.careYes"    -1.71     15.0     -0.114 0.910   
+## 14 "Monthly_SubscriptionYes"     36.4      15.7      2.31  0.0248
+```
+
+```
+## [1] 0.5308044
+```
+---
+##Variable: Gender - Cosmetics_._Self.care
+&lt;img src="presentation_files/figure-html/bad_variables1-1.png" width="80%" /&gt;
+
+---
+##Games_._Hobbies- Monthly_Subscriptions
+.pull-left[
+&lt;img src="presentation_files/figure-html/bad_variables2-1.png" width="80%" /&gt;
+]
+.pull-right[
+&lt;img src="presentation_files/figure-html/unnamed-chunk-8-1.png" width="80%" /&gt;
+]
+
+---
+
 
 ---
 # Gender
@@ -121,7 +192,7 @@ class: center, middle
 ---
 # Age and Study Year
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="80%" /&gt;
+&lt;img src="presentation_files/figure-html/unnamed-chunk-9-1.png" width="80%" /&gt;
 
 ---
 #Living
@@ -150,47 +221,7 @@ class: center, middle
 
 ---
 
-&lt;img src="presentation_files/figure-html/summarise-1.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-2.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-3.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-4.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-5.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-6.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-7.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-8.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-9.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-10.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-11.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/summarise-12.png" width="80%" /&gt;
 
----
-
-&lt;img src="presentation_files/figure-html/bad_variables-1.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/bad_variables-2.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/bad_variables-3.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/bad_variables-4.png" width="80%" /&gt;&lt;img src="presentation_files/figure-html/bad_variables-5.png" width="80%" /&gt;
-
-```r
-set.seed(1000)
-me_split &lt;- initial_split(me, prop = 0.8)
-
-train_data &lt;- training(me_split)
-testing_data &lt;- testing(me_split)
-
-
-# Second linear regression
-reg &lt;- linear_reg() %&gt;%
-  set_engine("lm") %&gt;%
-  fit(Monthly_expenses ~ .  - Drinks - Smoking - Cosmetics_._Self.care,data = train_data) 
-reg_predict &lt;- predict(reg, testing_data) %&gt;%
-  bind_cols(testing_data) %&gt;% transmute(resid = .pred - Monthly_expenses, Monthly_expenses = Monthly_expenses, .pred = .pred)
-REG &lt;- reg%&gt;%tidy()
-
-
-#Third linear regression. This one has high accuracy. But I'm not sure if it is good. From the high accuracy it might follow that there is some relation between Age, Study Year, Transporting and Living. May be we can plot some of those variables against each other. Apart from those variables I guess we can briefly say something about part time job gender and scholarship (in third linear regression they are also significant). 
-reg1 &lt;- linear_reg() %&gt;%
-  set_engine("lm") %&gt;%
-  fit(Monthly_expenses ~ . +Age*Study_year*Transporting*Living - Drinks - Smoking - Cosmetics_._Self.care - Monthly_Subscription,data = train_data) 
-reg_predict1 &lt;- predict(reg1, testing_data) %&gt;%
-  bind_cols(testing_data) %&gt;% transmute(resid = .pred - Monthly_expenses, Monthly_expenses = Monthly_expenses, .pred = .pred)
-```
-
-```
-## Warning in predict.lm(object = object$fit, newdata = new_data, type =
-## "response"): prediction from a rank-deficient fit may be misleading
-```
-
-```r
-REG1 &lt;- reg1%&gt;%tidy()
-
-#####So let's focus on: AGE, STUDY YEAR, LIVING, TRANSPORTING, GENDER, PART TIME JOB, SCHOLARSHIP.
-```
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
