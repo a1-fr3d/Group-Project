@@ -283,7 +283,8 @@ me <- monthly_expense %>%
 
 ggplot(data = me, mapping = aes(x = Age,
                                 fill = Study_year)) +
-  geom_bar()
+  geom_bar() +
+  labs( title = "Age vs Study Year")
 
 ```
 
@@ -361,7 +362,7 @@ ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Games_._Hobbies, fill 
     geom_boxplot()+
     labs(x = "Monthly Expenses",
          y = "Games & Hobbies", 
-         title = "The Relationship Between Games & Hobbies and Monthly Expenses")
+         title = "Games & Hobbies vs Monthly Expenses")
 ```
 
 ---
