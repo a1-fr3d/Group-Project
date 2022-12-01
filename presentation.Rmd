@@ -116,12 +116,12 @@ ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Gender, fill = Gender)
 me <- monthly_expense %>%
   filter(Monthly_expenses < 600) %>%
   mutate(Age = as.character(Age))
-ggplot(data = me, mapping = aes(y = Monthly_expenses, 
-                                x = Age,
+ggplot(data = me, mapping = aes(y = Age, 
+                                x = Monthly_expenses,
                                 fill = Age)) + 
   geom_boxplot() +
-  labs(title = "Age vs Monthly Expenses",
-       y = "Monthly Expenses")
+  labs(title = "Monthly Expenses",
+       y = "Age vs Monthly Expenses")
 ```
 
 ---
@@ -142,17 +142,31 @@ ggplot(data = me, mapping = aes(y = Monthly_expenses,
 ```
 
 ---
+# Age and Study Year
+
+```{r, echo=FALSE}
+me <- monthly_expense %>%
+  mutate(Study_year = as.factor(Study_year)) %>%
+  filter(!is.na(Age) & !is.na(Study_year))
+
+ggplot(data = me, mapping = aes(x = Age,
+                                fill = Study_year)) +
+  geom_bar()
+
+```
+
+---
 #Living
 
 ```{r, Living, echo = FALSE}
 me <- monthly_expense %>%
   mutate(Living = as.factor(Living)) %>%
   filter(!is.na(Living) & !is.na(Monthly_expenses))
-  ggplot(data = me, mapping = aes(x = Living,y = Monthly_expenses, fill = Living)) +
+  ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Living, fill = Living)) +
 geom_boxplot(show.legend = FALSE) +
     labs(title = "Types of Living vs Monthly Expenses",
-         x = "Living",
-         y = "Monthly Expenses")
+         x = "Monthly Expenses",
+         y = "Living")
 
 ```
 
@@ -163,13 +177,13 @@ geom_boxplot(show.legend = FALSE) +
 me <- monthly_expense %>%
   filter(!is.na(Scholarship) & !is.na(Monthly_expenses))
 
-ggplot(data = me, mapping = aes(x = Scholarship, 
-                     y = Monthly_expenses, 
+ggplot(data = me, mapping = aes(x = Monthly_expenses, 
+                     y = Scholarship, 
                      fill = Scholarship)) +
   geom_boxplot(show.legend = FALSE) +
   labs(title = "Scholarship vs Monthly Expenses",
-       x = "Scholarship",
-       y = "Monthly Expenses")
+       x = "Monthly Expenses",
+       y = "Scholarship")
 ```
 
 ---
@@ -178,13 +192,13 @@ ggplot(data = me, mapping = aes(x = Scholarship,
 ``` {r, Part time job, echo = FALSE}
 me <- monthly_expense %>%
   filter(!is.na(Part_time_job) & !is.na(Monthly_expenses))
-ggplot(data = me, mapping = aes(x = Part_time_job,
-                                y = Monthly_expenses,
+ggplot(data = me, mapping = aes(x = Monthly_expenses,
+                                y = Part_time_job,
                                 fill = Part_time_job)) +
   geom_boxplot(show.legend = FALSE) +
   labs(title = "Part-time Job vs Monthly Expenses",
-       x = "Part-Time Job",
-       y = "Monthly Expenses")
+       x = "Monthly Expenses",
+       y = "Part-Time Job")
 
 ```
 
@@ -194,31 +208,32 @@ ggplot(data = me, mapping = aes(x = Part_time_job,
 ``` {r, Transportation, echo = FALSE}
 me <- monthly_expense %>%
   filter(!is.na(Transporting) & !is.na(Monthly_expenses))
-ggplot(data = me, mapping = aes(x = Transporting,
-                                y = Monthly_expenses,
+ggplot(data = me, mapping = aes(x = Monthly_expenses,
+                                y = Transporting,
                                 fill = Transporting)) +
   geom_boxplot(show.legend = FALSE) +
   labs(title = "Transportation vs Monthly Expenses",
-       x = "Transportation",
-       y = "Monthly Expenses")
+       x = "Monthly Expenses",
+       y = "Transportation")
 
 ```
 
 ---
 # Game and Hobbies
 
-<<<<<<< HEAD
 ```{r, Game and Hobbies, echo = FALSE}
 me <- monthly_expense %>%
   filter(!is.na(Games_._Hobbies) & !is.na(Monthly_expenses))
 
-ggplot(data = me, mapping = aes(x = Games_._Hobbies, y = Monthly_expenses, fill = Games_._Hobbies))+
+ggplot(data = me, mapping = aes(x = Monthly_expenses, y = Games_._Hobbies, fill = Games_._Hobbies))+
     geom_boxplot()+
-    labs(x = "Games & Hobbies" ,
-         y = "Monthly expenses", 
-         title = "The Relationship Between Games & Hobbies and Monthly Expense")
+    labs(x = "Monthly Expenses",
+         y = "Games & Hobbies", 
+         title = "The Relationship Between Games & Hobbies and Monthly Expenses")
 ```
-=======
+
+---
+
 ```{r, summarise, echo = FALSE}
 # Create function that will plot counts against different responds on one variable
 
@@ -324,6 +339,3 @@ REG1 <- reg1%>%tidy()
 
 #####So let's focus on: AGE, STUDY YEAR, LIVING, TRANSPORTING, GENDER, PART TIME JOB, SCHOLARSHIP.
 ```
-
----
->>>>>>> 9cd3386d52d0dbade366a93a63397314a8c7ce75
