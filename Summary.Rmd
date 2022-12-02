@@ -70,3 +70,5 @@ Limitations on our data set
 Conclusion
 
 In conclusion, through the use of different data analysis techniques, we were able to show that age and study year are very important factors on how much students spend while they are at university. Additionally, we were able to show that our initial hypothesis was wrong as entertainment did not have the biggest effect on monthly expenses.
+
+https://github.com/a1-fr3d/Group-Project.git
