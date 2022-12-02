@@ -1,0 +1,72 @@
+Name:
+
+Alfred Chen S2413180,
+Leo Stack S2419702,
+Rolan Sakiyev S2417800,
+Ziyi Cheng S2304000,
+Yuxi Chen S2306481
+
+
+What affects student spending while at university
+
+Do factors such as gender, year of study, age, etc... affect how much money students spend while they are at university? Throughout our project we will be comparing different variables to the monthly expense variable to show how different groups of students spend their money. The data set that we used was found online from the website Kaggle. The data was collected through the means of an online survey. The data that we used has 13 variables and 105 observations.
+
+HYPOTHESIS
+
+From looking at our data we hypothesised that entertainment would have the biggest effect on student spending. We expected to see this because there are more variables to do with entertainment, for example, cosmetics, hobbies, smoking and drinking.
+
+METHOD AND FINDING
+
+Firstly, we plotted all our variables to see the count for each one. By doing so we were able to see that for some of them (drinks and smoking) their positive responses is low comparing to the negative ones. Therefor the data provided for drinks and smoking is not sufficient for making conclusions on their impact on monthly expenses. For further investigation we have comprised a linear regression model that uses the rest of the variables to predict monthly expenses. 
+
+The relations between the predicting variables were not considered. Based on this prediction model we hypothesised that the cosmetics and self-care variable has negligible correlation to monthly expenses. To investigate this, we plotted the graph for cosmetics and self-care against gender. According to this plot we can see that there is a high association between gender and cosmetics and self-care. From the plot we see that most of females spend on cosmetics while for males it is the opposite. Due to the high correlation between gender and cosmetics it is hard to identify the impact for each of those variables separately. Therefor we decided to exclude cosmetics and self-care. Next, we ran a second linear regression model without the excluded variables. According to this linear regression we have a weak link between monthly expenses and monthly subscriptions. So we then investigated the relation between monthly subscriptions and other predicting variables. In particular we have that for the graphs of positive responses for monthly subscriptions against monthly expenses and positive responses for games and hobbies against monthly expenses are similar. Therefore, games and hobbies have a significant correlation to monthly subscriptions.
+
+Due to this we decided to exclude the monthly subscriptions variable. 
+
+Additionally, we used a box plot to show the link between gender and monthly expense. In the red we have female and in the blue we have male. Our results in the box plot show that the median value for expenses is the same for both male and females. However, for males, we can see that the interquartile range is smaller than it is for females. This shows us that the results are more consistent for males. Furthermore, the plot also shows that males have more extreme outliers for monthly expenses. Most likely this shows us that a very small number of males spend much more than females. There is a chance that the outliers in the plot are not necessarily true, this could be due to errors in collecting the data.
+
+Additionally, we again used a box plot. Our aim for this plot was to show the relationship between age and monthly expenses. Our prediction here was as age increases so too does monthly expenses. Looking at the plot we can see that our hypothesis was correct for the most part as it does show a general trend of monthly expenses increasing but it is not entirely true for all ages. The median monthly expenses increase from ages 18 to 19 and also from ages 21 to 22. We see that ages 17 and 25 have only one observation, this does not give us an entirely accurate result as we would need more data to make the results more reliable. 
+
+
+
+Furthermore, through the use of a violin plot, we aimed to see the association between study year and monthly expenses. Our prediction for this was as study year increases, student spending also increases. In Year 1 the densest point is around 150, meaning that majority first year students spend around $150 a month. We can see these increases in year 2 to around $175. In year 3 the densest point is around $200, so again an increase in student expenses. Finally, we see that in year 4 the majority is just under $300 so it is another increase in student's monthly expenses. This shows that this plot is successful in illustrating that as student year increases so too does monthly expenses, as we predicted.
+
+To add to that, we also decided to use a bar chart to explore the link between age and study year. Before we made this bar chart we expected to identify a weak relation between the variables. This is because as age increases, study year does not necessarily increase as well. From the plot, we see that year 3 students vary a lot in age. We have some who are 19, some who are 22 and others who are 25. This is roughly what we predicted to see.
+
+
+
+In addition, we used a box plot  to find the relationship between where students live and monthly expenses. In the red we have students who are living at their home while they study at university and in the blue we have students who live at a hostel while they are at university. Our prediction for this plot was that students who stay at home while they study would spend less than students who stay at a hostel. We can see that the average values for both these groups are the same however, the lower quartile for those living at home is around $150 per month whereas for students staying in a hostel the lower quartile is around $180 per month. This does show that some students living in a hostel spend slightly more. 
+
+
+
+Due to the interquartile range being larger for students living at home and also the fact that the group has more extreme outliers, the results are less reliable than for those who live in a hostel.
+
+
+
+Moreover, we again chose to use another box plot to see the impact that having a scholarship has on monthly expenses. In the red students we have students who did not have a scholarship and in the blue we had those who did. Again, we see that the averages for both these groups are the same. The upper quartile for those who have a scholarship is around $300 which is higher than the upper quartile for the group of students who did not have a scholarship, which is about $250. This shows that on average, students in the third quartile of the plot who have a scholarship spend more money.
+
+
+
+Likewise, through the use of a box plot, we aimed to see the correlation between students who have a part-time job while they are at university and those who did not. For this plot we predict that students who do have a job will spend more money per month. In the red we see the average for students who do not have a part-time job is around $200 per month. In the blue we observe that the average for students who do have a part-time job is around $220. This increase clearly reveals that students who do have a part-time job spend more, as we thought
+
+Also, we utilised another box plot to see which mode of transportation affected students the most. Before we created this plot, we expected to see  “car” being the most expensive as fuel prices and repairs cost a lot as well as how much the car itself costs. In the plot we see that the median value for “car” is indeed the highest at $250 per month. We also observe that on average students who have a motorcycle spend $200 a month and students who do not use a car or a motorcycle spend around $180 a month on other means of transportation. This makes sense as motorcycles are expensive to own and there are also fuel costs to go along with it. Additionally, we see that for cars there is two extreme outliers. In this case, it could be due to students using their parent's car and just paying for fuel which is quite common for a lot of University students.
+
+Lastly, we employed another box plot to reveal the association between having a hobby and monthly expenses. Here we predicted that the students who did have a hobby would spend less as once they have the equipment, they will not need to spend much more on anything else. From the plot, we do indeed see this as the average for those who do not have a hobby is around $250 per month which is much higher than the average of $200 for the students who do have a hobby.
+
+Limitations on our data set 
+
+-Data was collected online which could lead to some unreliable results. For example, students saying they spent more than they really did. 
+
+-For some variables, not enough observations were taken. This makes it hard to show reliable and accurate results.
+
+-We do not know the income sources of the students. Therefor we cannot show how much money students spend compared to how much money they have. 
+
+-There was no variable for food in the data set, even though a large percentage of every student spending goes towards it.
+
+-We do not know which University these students went to. This is an issue as some university's tuition fees are more expensive than others and living costs can also vary depending on the area of the university. 
+
+-For the “transportation variable we only have three options: car, motorcycle or no. The “no” option is very vague as it could include lots of different types of transport. It would have been interesting to see how much money students who use only public transport, such as busses, spend.
+
+Conclusion
+
+In conclusion, through the use of different data analysis techniques, we were able to show that age and study year are very important factors on how much students spend while they are at university. Additionally, we were able to show that our initial hypothesis was wrong as entertainment did not have the biggest effect on monthly expenses.

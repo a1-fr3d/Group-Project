@@ -4,7 +4,7 @@ subtitle:
 author: " Brainless Data Group <br> Alfred, Leo, Rolan, Yuki, Ariana"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
-output:
+output: 
   xaringan::moon_reader:
     css: xaringan-themer.css
     lib_dir: libs
@@ -94,7 +94,9 @@ class: center, middle
 # Hypothesis
 
  Entertainment has the most effect on students' monthly expense.
+ 
 ---
+
 ```{r, summarise, echo = FALSE}
 # Create function that will plot counts against different responds on one variable
 
